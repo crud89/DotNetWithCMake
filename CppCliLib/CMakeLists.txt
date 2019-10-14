@@ -10,9 +10,7 @@ SET(CppCliLib_SOURCES
 )
 
 # Add shared library project.
-# NOTE: Library type is `MODULE`, since no symbols are exported. `SHARED` libraries *must* 
-#       always export symbols! (https://cmake.org/cmake/help/latest/command/add_library.html)
-ADD_LIBRARY(CppCliLib MODULE
+ADD_LIBRARY(CppCliLib SHARED
     ${RENDERING_HEADERS}
     ${RENDERING_SOURCES}
 )
