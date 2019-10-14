@@ -8,15 +8,25 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 
 There are two top-level projects: *WinFormsApp* and *WpfApp*. Both projects create executables and depend on the projects *CSharpLib* and *CppCliLib*, which create managed DLL assemblies. Both of them depend on a common *CommonLib* project, which also is a managed DLL assembly and demonstrates is used to demonstrate how to call a C# library from a C++/CLI library.
 
+## General Advice (Rule of Thumb)
+
+When working with managed project, follow these rules to prevent typical pitfalls:
+
+- Always define managed libraries as `SHARED`, i.e. do not use `MODULE`, except for libraries that are optional (like PlugIns) and do not need to be copied to the output directory.
+- Use `ADD_DEPENDENCIES` to model a reference to a managed library.
+- Only when you have two C++/CLI projects: use `TARGET_LINK_LIBRARIES` (and `INCLUDE_DIRECTORIES`) additionally to `ADD_DEPENDENCIES`, if you also want to link unmanaged symbols (also see *Uncovered Cases* below). Note that the build will fail, if the referenced project does not export any unmanaged symbols.
+
+For more information, also take a look at [this issue](https://gitlab.kitware.com/cmake/cmake/issues/19814).
+
 ## Uncovered use-cases
 
 Some use-cases are not explicitly covered in the examples.
 
 ### Referencing unmanaged libraries
 
-C++/CLI can be used to create wrapper libraries for unmanaged code. Handling unmanaged library (static or shared) dependencies for C++/CLI projects works the same way as for classic C++ libraries. Basically all you have to do is specify the dependency and include directory:
+C++/CLI can be used to create wrapper libraries for unmanaged code. Handling unmanaged library (static or shared) dependencies for C++/CLI projects works the same way as for classic C++ libraries. Basically all you have to do is specify the dependency and include directory and specify the link libraries.
 
-    ADD_DEPENDENCIES(CliCppLib UnmanagedLib)
+    TARGET_LINK_LIBRARIES(CliCppLib UnmanagedLib)
     INCLUDE_DIRECTORIES(CliCppLib ${UnmanagedLib_SOURCE_DIR})
 
 Alternatively, you can also use `FIND_PACKAGE`:
