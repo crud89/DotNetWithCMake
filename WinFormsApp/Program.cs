@@ -11,7 +11,7 @@ namespace WinFormsApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            System.Windows.Forms.Show("Test");
+            MessageBox.Show("Test");
         }
     }
 }
