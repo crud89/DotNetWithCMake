@@ -11,15 +11,15 @@ SET(CppCliLib_SOURCES
 
 # Add shared library project.
 ADD_LIBRARY(CppCliLib SHARED
-    ${RENDERING_HEADERS}
-    ${RENDERING_SOURCES}
+    ${CppCliLib_HEADERS}
+    ${CppCliLib_SOURCES}
 )
 
 # Add a managed dependency.
 ADD_DEPENDENCIES(CppCliLib CommonLib)
 
 # Optional: Create source groups for better code organization.
-SOURCE_GROUP(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${RENDERING_HEADERS} ${RENDERING_SOURCES})
+SOURCE_GROUP(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${CppCliLib_SOURCES} ${CppCliLib_SOURCES})
 
 # Define the assembly to be mixed-mode (managed + unmanaged).
 SET_PROPERTY(TARGET CppCliLib PROPERTY COMMON_LANGUAGE_RUNTIME "")

@@ -1,5 +1,5 @@
 # Setup project.
-PROJECT(WpfApp 1.0.0.0 LANGUAGES CSharp)
+PROJECT(WpfApp VERSION 1.0.0.0 LANGUAGES CSharp)
 
 # Setup project to use C# utilities.
 INCLUDE(CSharpUtilities)
@@ -41,7 +41,7 @@ CSHARP_SET_XAML_CS_PROPERTIES(
 
 # Setup project dependencies.
 ADD_DEPENDENCIES(WpfApp CommonLib)
-ADD_DEPENDENCIES(WpfApp CliCppLib)
+ADD_DEPENDENCIES(WpfApp CppCliLib)
 ADD_DEPENDENCIES(WpfApp CSharpLib)
 
 # Setup project properties.

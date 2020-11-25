@@ -1,5 +1,5 @@
 # Setup project.
-PROJECT(WinFormsApp 1.0.0.0 LANGUAGES CSharp)
+PROJECT(WinFormsApp VERSION 1.0.0.0 LANGUAGES CSharp)
 
 # Setup project to use C# utilities.
 INCLUDE(CSharpUtilities)
@@ -9,7 +9,7 @@ CONFIGURE_FILE("Properties/AssemblyInfo.cs.template" "Properties/AssemblyInfo.cs
 
 # Add executable project.
 ADD_EXECUTABLE(WinFormsApp
-	"App.config"
+	#"App.config"
 	
 	"Program.cs"
 
@@ -33,7 +33,7 @@ CSHARP_SET_WINDOWS_FORMS_PROPERTIES(
 
 # Setup project dependencies.
 ADD_DEPENDENCIES(WinFormsApp CommonLib)
-ADD_DEPENDENCIES(WinFormsApp CliCppLib)
+ADD_DEPENDENCIES(WinFormsApp CppCliLib)
 ADD_DEPENDENCIES(WinFormsApp CSharpLib)
 
 # Setup project properties.

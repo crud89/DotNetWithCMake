@@ -1,5 +1,5 @@
 # Setup project.
-PROJECT(CommonLib 1.0.0.0 LANGUAGES CSharp)
+PROJECT(CommonLib VERSION 1.0.0.0 LANGUAGES CSharp)
 
 # Setup project to use C# utilities.
 INCLUDE(CSharpUtilities)

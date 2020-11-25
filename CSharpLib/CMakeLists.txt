@@ -1,5 +1,5 @@
 # Setup project.
-PROJECT(CSharpLib 1.0.0.0 LANGUAGES CSharp)
+PROJECT(CSharpLib VERSION 1.0.0.0 LANGUAGES CSharp)
 
 # Setup project to use C# utilities.
 INCLUDE(CSharpUtilities)
@@ -10,7 +10,7 @@ CONFIGURE_FILE("Properties/AssemblyInfo.cs.template" "Properties/AssemblyInfo.cs
 # Add shared library project.
 ADD_LIBRARY(CSharpLib SHARED
     "Properties/AssemblyInfo.cs"
-    "Common.cs"
+    "CSharpClass.cs"
 )
 
 # Set designer and XAML properties.
