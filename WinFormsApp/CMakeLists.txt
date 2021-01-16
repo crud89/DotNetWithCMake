@@ -47,3 +47,6 @@ SET_PROPERTY(TARGET WinFormsApp PROPERTY VS_DOTNET_REFERENCES
 	"System.Drawing"
 	"System.Windows.Forms"
 )
+
+# Setup root namespace for the project.
+set_property(TARGET WinFormsApp PROPERTY VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME})

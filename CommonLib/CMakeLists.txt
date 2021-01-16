@@ -29,3 +29,5 @@ SET_PROPERTY(TARGET CommonLib PROPERTY VS_DOTNET_REFERENCES
     "System.Core"
 )
 
+# Setup root namespace for the project.
+set_property(TARGET CommonLib PROPERTY VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME})
