@@ -12,6 +12,7 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 - [Building](#building)
     - [From Command Line](#from-command-line)
     - [Using Visual Studio CMake Integration](#using-visual-studio-cmake-integration)
+    - [Automatically Restoring NuGet Packages](#automatically-restoring-nuget-packages)
 
 ## Project Structure
 
