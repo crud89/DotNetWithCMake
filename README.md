@@ -4,6 +4,8 @@ This project contains a .NET dummy application that can be build with CMake. It 
 
 Note that .NET projects require Visual Studio to be build. CMake only manages and sets up the required build scripts for the your Visual Studio version.
 
+<!-- TOC -->autoauto- [.NET with CMake](#net-with-cmake)auto    - [Project Structure](#project-structure)auto    - [General Advice (Rule of Thumb)](#general-advice-rule-of-thumb)auto    - [Uncovered use-cases](#uncovered-use-cases)auto        - [Referencing unmanaged libraries](#referencing-unmanaged-libraries)auto        - [Referencing NuGet packages](#referencing-nuget-packages)auto        - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)auto    - [Building](#building)auto        - [From Command Line](#from-command-line)auto        - [Using Visual Studio CMake Integration](#using-visual-studio-cmake-integration)autoauto<!-- /TOC -->
+
 ## Project Structure
 
 There are two top-level projects: *WinFormsApp* and *WpfApp*. Both projects create executables and depend on the projects *CSharpLib* and *CppCliLib*, which create managed DLL assemblies. Both of them depend on a common *CommonLib* project, which also is a managed DLL assembly and demonstrates is used to demonstrate how to call a C# library from a C++/CLI library.
