@@ -20,6 +20,9 @@ ENDIF()
 # Set the C++ standard for all projects.
 SET(CMAKE_CXX_STANDARD 17)
 
+# Set export directory for CMake config.
+SET(CMAKE_INSTALL_EXPORT_DIR "cmake")
+
 # Include sub-projects.
 ADD_SUBDIRECTORY(src/CommonLib)
 ADD_SUBDIRECTORY(src/CppCliLib)
