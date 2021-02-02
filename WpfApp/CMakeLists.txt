@@ -62,3 +62,6 @@ SET_PROPERTY(TARGET WpfApp PROPERTY VS_DOTNET_REFERENCES
 	"System.Xml.Linq"
     "WindowsBase"
 )
+
+# Setup root namespace for the project.
+SET_PROPERTY(TARGET WpfApp PROPERTY VS_GLOBAL_ROOTNAMESPACE WpfApp)

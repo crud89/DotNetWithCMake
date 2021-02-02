@@ -30,3 +30,6 @@ SET_PROPERTY(TARGET CppCliLib PROPERTY VS_DOTNET_REFERENCES
 	"System"
     "System.Core"
 )
+
+# Setup root namespace for the project.
+SET_PROPERTY(TARGET CppCliLib PROPERTY VS_GLOBAL_ROOTNAMESPACE CppCliLib)
