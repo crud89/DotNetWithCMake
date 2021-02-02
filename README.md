@@ -8,7 +8,6 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 - [General Advice (Rule of Thumb)](#general-advice-rule-of-thumb)
 - [Uncovered use-cases](#uncovered-use-cases)
     - [Referencing unmanaged libraries](#referencing-unmanaged-libraries)
-    - [Referencing NuGet packages](#referencing-nuget-packages)
     - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)
 - [Building](#building)
     - [From Command Line](#from-command-line)
@@ -45,27 +44,6 @@ Alternatively, you can also use `FIND_PACKAGE`:
     TARGET_LINK_LIBRARIES(CliCppLib ${MYPACKAGE_LIBRARY})
     TARGET_INCLUDE_DIRECTORIES(CliCppLib PUBLIC ${MYPACKAGE_HEADER})
 
-### Referencing NuGet packages
-
-Many .NET projects depend on NuGet packages. Defining nuget dependencies is not very hard. First of all, create a `packages.config` file in the respective project folder. After configuring the `AssemblyInfo.cs` file, also copy it over to the build directory:
-
-    CONFIGURE_FILE("Properties/AssemblyInfo.cs.template" "Properties/AssemblyInfo.cs")
-    CONFIGURE_FILE("packages.config" "packages.config")
-
-If you want to, you can try to restore the NuGet packages while running CMake like so:
-
-    FIND_PROGRAM(NUGET nuget)
-
-    IF(NUGET)
-	    EXECUTE_PROCESS(COMMAND ${NUGET} restore "packages.config" -SolutionDirectory ${CMAKE_BINARY_DIR} WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-    ENDIF(NUGET)
-
-This is not required, since Visual Studio automatically restores the packages before building the solution. If this does not work, right-click the solution in Visual Studio's project explorer and choose *Restore NuGet packages*.
-
-Finally you have to tell CMake that you want to add a reference to the NuGet packages from the `package.config` file to your project. Unfortunately, you have to do this for each package manually. Here is an example for adding [Serilog](https://serilog.net/):
-
-    SET_PROPERTY(TARGET MyLib PROPERTY VS_DOTNET_REFERENCE_Serilog "${CMAKE_BINARY_DIR}/packages/Serilog.2.8.0/lib/net46/Serilog.dll")
-
 ### Building managed Assemblies as `AnyCPU`
 
 The top-level `CMakeLists.txt` file checks the generator used to build the project and sets the target platform accordingly. Note that `AnyCPU` assemblies might cause problems when loaded from an unmanaged context. This is why this template explicitly sets the target platform to either `x64` or `x86`, depending on which generator platform is used. In case an unsupported platform is detected or none is provided (using the command line parameter `-A`), the script will issue a warning and default to `AnyCPU`.
@@ -94,3 +72,27 @@ The template contains a pre-defined `CMakeSettings.json` file that you can use i
 When you are doing this on your own, you have to explicitly specify the `generator`, since Ninja (the default generator) currently [does not support .NET](https://gitlab.kitware.com/cmake/cmake/-/issues/16865). When trying to build any managed assemblies using Ninja, you will receive an error similar to this:
 
 > CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage.
+
+### Automatically Restoring NuGet Packages
+
+Since Visual Studio 2019, `msbuild` can be configured to automatically restore NuGet packages. [CMake 3.15](https://gitlab.kitware.com/cmake/cmake/-/merge_requests/3389) simplified specifying NuGet package references. [CMake 3.18](https://gitlab.kitware.com/cmake/cmake/-/issues/20764) fixed an issue that occured when restoring NuGet packages. So if you are running Visual Studio 2019 with CMake 3.18, you can try to automatically resolve and restore NuGet dependencies. In order to add a package reference to your project, specify the following property:
+
+    SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_PACKAGE_REFERENCES "Serilog_2.9.0;Serilog.Sinks.Console_3.1.1")
+    
+This will define a package reference inside a C# or C++/CLI project. When building from command line, MSBuild should detect the `.csproj` target and automatically restore the packages. When using the Visual Studio CMake integration, it is possible to tell MSBuild to restore package dependencies before building by specifying the [`-r`](https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild-command-line-reference) switch. You can do this by adding a build argument in the `CMakeSettings.json` file:
+
+```json
+{
+  "configurations": [
+    {
+      "name": "x64-Debug",
+      "generator": "Visual Studio 16 2019 Win64",
+      "configurationType": "Debug",
+      "inheritEnvironments": [ "msvc_x64" ],
+      "buildRoot": "${projectDir}\\..\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\..\\out\\install\\${name}",
+      "buildCommandArgs": "-r"
+    }
+  ]
+}
+```
