@@ -55,3 +55,32 @@ This is not required, since Visual Studio automatically restores the packages be
 Finally you have to tell CMake that you want to add a reference to the NuGet packages from the `package.config` file to your project. Unfortunately, you have to do this for each package manually. Here is an example for adding [Serilog](https://serilog.net/):
 
     SET_PROPERTY(TARGET MyLib PROPERTY VS_DOTNET_REFERENCE_Serilog "${CMAKE_BINARY_DIR}/packages/Serilog.2.8.0/lib/net46/Serilog.dll")
+
+### Building managed Assemblies as `AnyCPU`
+
+The top-level `CMakeLists.txt` file checks the generator used to build the project and sets the target platform accordingly. Note that `AnyCPU` assemblies might cause problems when loaded from an unmanaged context. This is why this template explicitly sets the target platform to either `x64` or `x86`, depending on which generator platform is used. In case an unsupported platform is detected or none is provided (using the command line parameter `-A`), the script will issue a warning and default to `AnyCPU`.
+
+If you know what you are doing and want to explicitly build `AnyCPU` assemblies anyway, you have to set the `${CMAKE_CSharp_FLAGS}` accordingly:
+
+    SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU")
+
+## Building
+
+.NET support for CMake is closely tied to Windows and Visual Studio environments, hence there might be some "incompatibilities" for the general purpose. The template has not been tested with Mono or .NET Core / Linux environments.
+
+### From Command Line
+
+Building the template from command line is straightforward:
+
+    cmake . -B build/ -A x64
+    cmake --build build/
+
+If you want to instead create an `x86` build, change the `-A` parameter to `Win32`.
+
+### Using Visual Studio CMake Integration
+
+The template contains a pre-defined `CMakeSettings.json` file that you can use in your own project, if you want to use Visual Studios integrated CMake support. 
+
+When you are doing this on your own, you have to explicitly specify the `generator`, since Ninja (the default generator) currently [does not support .NET](https://gitlab.kitware.com/cmake/cmake/-/issues/16865). When trying to build any managed assemblies using Ninja, you will receive an error similar to this:
+
+> CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage.
