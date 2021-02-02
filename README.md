@@ -4,7 +4,15 @@ This project contains a .NET dummy application that can be build with CMake. It 
 
 Note that .NET projects require Visual Studio to be build. CMake only manages and sets up the required build scripts for the your Visual Studio version.
 
-<!-- TOC -->autoauto- [.NET with CMake](#net-with-cmake)auto    - [Project Structure](#project-structure)auto    - [General Advice (Rule of Thumb)](#general-advice-rule-of-thumb)auto    - [Uncovered use-cases](#uncovered-use-cases)auto        - [Referencing unmanaged libraries](#referencing-unmanaged-libraries)auto        - [Referencing NuGet packages](#referencing-nuget-packages)auto        - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)auto    - [Building](#building)auto        - [From Command Line](#from-command-line)auto        - [Using Visual Studio CMake Integration](#using-visual-studio-cmake-integration)autoauto<!-- /TOC -->
+- [Project Structure](#project-structure)
+- [General Advice (Rule of Thumb)](#general-advice-rule-of-thumb)
+- [Uncovered use-cases](#uncovered-use-cases)
+    - [Referencing unmanaged libraries](#referencing-unmanaged-libraries)
+    - [Referencing NuGet packages](#referencing-nuget-packages)
+    - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)
+- [Building](#building)
+    - [From Command Line](#from-command-line)
+    - [Using Visual Studio CMake Integration](#using-visual-studio-cmake-integration)
 
 ## Project Structure
 
