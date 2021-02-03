@@ -90,8 +90,8 @@ This will define a package reference inside a C# or C++/CLI project. When buildi
       "generator": "Visual Studio 16 2019 Win64",
       "configurationType": "Debug",
       "inheritEnvironments": [ "msvc_x64" ],
-      "buildRoot": "${projectDir}\\..\\out\\build\\${name}",
-      "installRoot": "${projectDir}\\..\\out\\install\\${name}",
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\install\\${name}",
       "buildCommandArgs": "-r"
     }
   ]
