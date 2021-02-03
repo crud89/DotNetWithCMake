@@ -23,6 +23,12 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
     PUBLIC CommonLib
 )
 
+# Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).
+# This will not be enabled for Release or MinSizeRel builds.
+TARGET_LINK_OPTIONS(${PROJECT_NAME} 
+    PUBLIC $<$<OR:$<CONFIG:>,$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:/DEBUG /ASSEMBLYDEBUG>
+)
+
 # Define the assembly to be mixed-mode (managed + unmanaged).
 SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY COMMON_LANGUAGE_RUNTIME "")
 
