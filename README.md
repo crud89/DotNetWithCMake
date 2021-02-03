@@ -11,6 +11,7 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
         - [Note on IntelliSense](#note-on-intellisense)
     - [Automatically Restoring NuGet Packages](#automatically-restoring-nuget-packages)
     - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)
+- [Debugging](#debugging)
 
 ## Project Structure
 
@@ -89,3 +90,13 @@ If you know what you are doing and want to explicitly build `AnyCPU` assemblies 
 ```cmake
 SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU")
 ```
+
+## Debugging
+
+In order to step into mixed-mode C++/CLI assemblies or set breakpoints, the linker options `/DEBUG` and `/ASSEMBLYDEBUG` need to be set for the C++/CLI projects:
+
+```cmake
+TARGET_LINK_OPTIONS(${PROJECT_NAME} PUBLIC /DEBUG /ASSEMBLYDEBUG)
+```
+
+The *CppCliLib* project uses a generator expression to only use those options in *Debug* and *RelWithDebInfo* builds.
