@@ -35,8 +35,10 @@ Both, the *CSharpLib* and *CppCliLib* implement a class that returns a string fr
 
 Building the template from command line is straightforward:
 
-    cmake . -B build/ -A x64
-    cmake --build build/
+```shell
+cmake . -B build/ -A x64
+cmake --build build/
+```
 
 If you want to instead create an `x86` build, change the `-A` parameter to `Win32`.
 
@@ -56,8 +58,10 @@ The VS-integrated CMake support (i.e. the CMake target view) does not work with 
 
 Since Visual Studio 2019, `msbuild` can be configured to automatically restore NuGet packages. [CMake 3.15](https://gitlab.kitware.com/cmake/cmake/-/merge_requests/3389) simplified specifying NuGet package references. [CMake 3.18](https://gitlab.kitware.com/cmake/cmake/-/issues/20764) fixed an issue that occured when restoring NuGet packages. So if you are running Visual Studio 2019 with CMake 3.18, you can try to automatically resolve and restore NuGet dependencies. In order to add a package reference to your project, specify the following property:
 
-    SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_PACKAGE_REFERENCES "Serilog_2.9.0;Serilog.Sinks.Console_3.1.1")
-    
+```cmake
+SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_PACKAGE_REFERENCES "Serilog_2.9.0;Serilog.Sinks.Console_3.1.1")
+```
+
 This will define a package reference inside a C# or C++/CLI project. When building from command line, MSBuild should detect the `.csproj` target and automatically restore the packages. When using the Visual Studio CMake integration, it is possible to tell MSBuild to restore package dependencies before building by specifying the [`-r`](https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild-command-line-reference) switch. You can do this by adding a build argument in the `CMakeSettings.json` file:
 
 ```json
@@ -82,4 +86,6 @@ The top-level `CMakeLists.txt` file checks the generator used to build the proje
 
 If you know what you are doing and want to explicitly build `AnyCPU` assemblies anyway, you have to set the `CMAKE_CSharp_FLAGS` accordingly:
 
-    SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU")
+```cmake
+SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU")
+```
