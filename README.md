@@ -81,6 +81,19 @@ This will define a package reference inside a C# or C++/CLI project. When buildi
 }
 ```
 
+#### Using NuGet-Packages in C++/CLI projects
+
+Whilst in theory it is possible for C++/CLI projects to use NuGet packages that target the same .NET Framework version, it is currently [not properly implemented by Microsoft](https://developercommunity.visualstudio.com/idea/899866/ccli-cant-reference-nuget-packages.html). The naïve approach of defining a `VS_PACKAGE_REFERENCE`, as you would do for a C# project, will result in NuGet not beeing able to resolve the target framework for the project:
+
+> You are trying to install this package into a project that targets 'native,Version=v0.0', but the package does not contain any assembly references or content files that are compatible with that framework.
+
+There are two possible workarounds for this issue, both of which require an intermediate C# project that has a `VS_PACKAGE_REFERENCE` set, so that MSBuild is able to restore the package.
+
+1. Write a wrapper class for all the interfaces you wish to call. Obviously not very feasible.
+2. Use a hard reference (i.e. `VS_DOTNET_REFERENCE_*`) to the package assembly. However, this approach is not ideal, since you have to know where the current NuGet package cache resides, which might cause upwards compatibility problems.
+
+For more information, I've created [this issue](https://github.com/Aschratt/DotNetWithCMake/issues/4) to track a possible solution for this problem.
+
 ### Building managed Assemblies as `AnyCPU`
 
 The top-level `CMakeLists.txt` file checks the generator used to build the project and sets the target platform accordingly. Note that `AnyCPU` assemblies might cause problems when loaded from an unmanaged context. This is why this template explicitly sets the target platform to either `x64` or `x86`, depending on which generator platform is used. In case an unsupported platform is detected or none is provided (using the command line parameter `-A`), the script will issue a warning and default to `AnyCPU`.
