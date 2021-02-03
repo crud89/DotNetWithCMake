@@ -2,11 +2,8 @@ using System;
 
 namespace Example 
 {
-    public class Test
+    public interface IHello
     {
-        public string SayHello()
-        {
-            return "Hello!";
-        }
+        string SayHello();
     }
 }

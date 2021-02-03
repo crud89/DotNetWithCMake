@@ -18,19 +18,11 @@ CSHARP_SET_DESIGNER_CS_PROPERTIES(
     "Properties/AssemblyInfo.cs"
 )
 
-# NOTE: If you want to restore NuGet packages (see README.md), do it here!
-
-# Setup the .NET Framework version.
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
-
-# Setup the default assembly references.
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_DOTNET_REFERENCES
-	"System"
-    "System.Core"
+# Set CLR assembly properties.
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES
+    VS_DOTNET_REFERENCES "System;System.Core"
+    VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME}
 )
-
-# Setup root namespace for the project.
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME})
 
 # Setup installer.
 INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config

@@ -15,11 +15,18 @@ using System.Windows.Shapes;
 
 namespace WpfApp
 {
+    using Example;
+
     public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+
+            IHello hello = new CSharpClass();
+            MessageBox.Show(hello.SayHello());
+            hello = new CppCliClass();
+            MessageBox.Show(hello.SayHello());
         }
     }
 }

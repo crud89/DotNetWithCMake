@@ -2,9 +2,9 @@ using System;
 
 namespace Example 
 {
-    public class CSharpClass
+    public class CSharpClass : IHello
     {
-        public string SayHello()
+        public string SayHello() 
         {
             return "I am a C# class!";
         }

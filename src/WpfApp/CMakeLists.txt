@@ -39,32 +39,19 @@ CSHARP_SET_XAML_CS_PROPERTIES(
     "MainWindow.xaml.cs"
 )
 
-# Setup project dependencies.
-ADD_DEPENDENCIES(${PROJECT_NAME} CommonLib)
-ADD_DEPENDENCIES(${PROJECT_NAME} CppCliLib)
-ADD_DEPENDENCIES(${PROJECT_NAME} CSharpLib)
-
-# Setup project properties.
 SET_PROPERTY(SOURCE App.xaml PROPERTY VS_XAML_TYPE "ApplicationDefinition")
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY WIN32_EXECUTABLE TRUE)
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_DOTNET_REFERENCES
-	"Microsoft.CSharp"
-	"PresentationCore"
-	"PresentationFramework"
-	"System"
-	"System.Core"
-	"System.Data"
-	"System.Data.DataSetExtensions"
-	"System.Net.Http"
-	"System.Xaml"
-	"System.Xml"
-	"System.Xml.Linq"
-    "WindowsBase"
+
+# Define dependencies.
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+    PUBLIC CommonLib CppCliLib CSharpLib
 )
 
-# Setup root namespace for the project.
-SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME})
+# Set CLR assembly properties.
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES
+	WIN32_EXECUTABLE TRUE
+    VS_DOTNET_REFERENCES "System;System.Core;System.Data;System.Data.DataSetExtensions;System.Drawing;System.Net.Http;System.Xaml;System.Xml.Linq;Microsoft.CSharp;PresentationCore;PresentationFramework;WindowsBase"
+    VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME}
+)
 
 # Setup installer.
 INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config

@@ -3,6 +3,9 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
 PROJECT(Example LANGUAGES CSharp CXX)
 
+# Set global .NET Framework version.
+SET(CMAKE_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
+
 # Set the C# language version for all projects.
 SET(CMAKE_CSharp_FLAGS "/langversion:6")
 
