@@ -8,6 +8,7 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 - [Building](#building)
     - [From Command Line](#from-command-line)
     - [Using Visual Studio CMake Integration](#using-visual-studio-cmake-integration)
+        - [Note on IntelliSense](#note-on-intellisense)
     - [Automatically Restoring NuGet Packages](#automatically-restoring-nuget-packages)
     - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)
 
@@ -46,6 +47,10 @@ The template contains a pre-defined `CMakeSettings.json` file that you can use i
 When you are doing this on your own, you have to explicitly specify the `generator`, since Ninja (the default generator) currently [does not support .NET](https://gitlab.kitware.com/cmake/cmake/-/issues/16865). When trying to build any managed assemblies using Ninja, you will receive an error similar to this:
 
 > CMake Error: CMAKE_CSharp_COMPILER not set, after EnableLanguage.
+
+#### Note on IntelliSense
+
+The VS-integrated CMake support (i.e. the CMake target view) does not work with IntelliSense for managed CMake projects. The workaround is to open the generated solution file (*build/[env]/Example.sln*) from a second Visual Studio instance. I've created a [bug report](https://developercommunity2.visualstudio.com/t/1328932) for this issue.
 
 ### Automatically Restoring NuGet Packages
 
