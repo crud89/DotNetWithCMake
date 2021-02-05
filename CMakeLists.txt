@@ -24,7 +24,10 @@ ENDIF()
 SET(CMAKE_CXX_STANDARD 17)
 
 # Set export directory for CMake config.
-SET(CMAKE_INSTALL_EXPORT_DIR "cmake")
+SET(CMAKE_INSTALL_BINARY_DIR "bin/")
+SET(CMAKE_INSTALL_LIBRARY_DIR "bin/")
+SET(CMAKE_INSTALL_INCLUDE_DIR "include/")
+SET(CMAKE_INSTALL_EXPORT_DIR "cmake/")
 
 # Include sub-projects.
 ADD_SUBDIRECTORY(src/CommonLib)
