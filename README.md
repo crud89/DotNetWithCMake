@@ -16,7 +16,7 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 
 ## Project Structure
 
-There are two top-level projects: *WinFormsApp* and *WpfApp*. Both projects create executables and depend on the projects *CSharpLib* and *CppCliLib*, which create managed DLL assemblies. Both of them depend on a common *CommonLib* project, which also is a managed DLL assembly and demonstrates is used to demonstrate how to call a C# library from a C++/CLI library.
+There are two top-level projects: *WinFormsApp* and *WpfApp*. Both projects create executables and depend on the projects *CSharpLib* and *CppCliLib*, which create managed DLL assemblies. Both of them depend on a common *CommonLib* project, which also is a managed DLL assembly and is used to demonstrate how to call a C# library from a C++/CLI library.
 
 The *CommonLib* defines the `IHello` interface, which looks like this:
 
@@ -64,7 +64,7 @@ Since Visual Studio 2019, `msbuild` can be configured to automatically restore N
 SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_PACKAGE_REFERENCES "Serilog_2.9.0;Serilog.Sinks.Console_3.1.1")
 ```
 
-This will define a package reference inside a C# or C++/CLI project. When building from command line, MSBuild should detect the `.csproj` target and automatically restore the packages. When using the Visual Studio CMake integration, it is possible to tell MSBuild to restore package dependencies before building by specifying the [`-r`](https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild-command-line-reference) switch. You can do this by adding a build argument in the `CMakeSettings.json` file:
+This will define a package reference inside a project. When building from command line, MSBuild should detect the `.csproj` target and automatically restore the packages. When using the Visual Studio CMake integration, it is possible to tell MSBuild to restore package dependencies before building by specifying the [`-r`](https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild-command-line-reference) switch. You can do this by adding a build argument in the `CMakeSettings.json` file:
 
 ```json
 {
@@ -94,6 +94,10 @@ There are two possible workarounds for this issue, both of which require an inte
 2. Use a hard reference (i.e. `VS_DOTNET_REFERENCE_*`) to the package assembly. However, this approach is not ideal, since you have to know where the current NuGet package cache resides, which might cause upwards compatibility problems.
 
 For more information, I've created [this issue](https://github.com/Aschratt/DotNetWithCMake/issues/4) to track a possible solution for this problem.
+
+#### Installing NuGet-Packages
+
+Packages should be installed automatically, if they are defined as `VS_PACKAGE_REFERENCE`. However, there appears to be an issue, if the reference is only defined in the top level (or executable) project. It will be restored during build, but CMake apparently is unable to pick it up and copy it during install. I am not sure if this is an CMake bug, or some configuration issue. I could not find any issues within the project files, but couldn't be bothered to investigate this further. A quick workaround is to define a intermediate C# library project, move all the references there and add a dependency to the executable. If you have any further information on this problem, open an issue in this repository or (if it's actually related to CMake) at the [CMake repository](https://gitlab.kitware.com/cmake/cmake/-/issues/).
 
 ### Building managed Assemblies as `AnyCPU`
 
