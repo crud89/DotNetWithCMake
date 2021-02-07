@@ -9,7 +9,7 @@ CONFIGURE_FILE("Properties/AssemblyInfo.cs.template" "Properties/AssemblyInfo.cs
 
 # Add executable project.
 ADD_EXECUTABLE(${PROJECT_NAME}
-    "App.config"
+    "app.config"
 
 	"App.xaml"
 	"App.xaml.cs"
@@ -60,6 +60,10 @@ INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINARY_DIR}
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDE_DIR}
 )
+
+INSTALL(FILES "app.config" DESTINATION ${CMAKE_INSTALL_BINARY_DIR} RENAME "${PROJECT_NAME}.config")
+# Also covers targets with different OUTPUT_NAME properties. Not yet supported, but will be added in near future: https://gitlab.kitware.com/cmake/cmake/-/issues/19903
+#INSTALL(FILES "app.config" DESTINATION ${CMAKE_INSTALL_BINARY_DIR} RENAME "$<TARGET_FILE_NAME:${PROJECT_NAME}>.config")
 
 # Export config.
 INSTALL(EXPORT ${PROJECT_NAME}Config DESTINATION ${CMAKE_INSTALL_EXPORT_DIR})
