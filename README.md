@@ -11,6 +11,7 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
         - [Note on IntelliSense](#note-on-intellisense)
     - [Automatically Restoring NuGet Packages](#automatically-restoring-nuget-packages)
         - [Using NuGet-Packages in C++/CLI projects](#using-nuget-packages-in-ccli-projects)
+        - [Installing NuGet-Packages](#installing-nuget-packages)
     - [Building managed Assemblies as `AnyCPU`](#building-managed-assemblies-as-anycpu)
 - [Debugging](#debugging)
 
