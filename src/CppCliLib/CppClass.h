@@ -7,6 +7,6 @@ namespace Example {
     public ref class CppCliClass : public IHello {
     public:
         virtual String^ SayHello();
+        virtual int AnswerEverything();
     };
-
 };
