@@ -9,10 +9,6 @@ SET(CMAKE_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
 # Set the C# language version for all projects.
 SET(CMAKE_CSharp_FLAGS "/langversion:6")
 
-IF(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES "Debug|RelWithDebInfo")
-    SET(CMAKE_CSharp_FLAGS "${CMAKE_CSharp_FLAGS} /debugtype:full")
-ENDIF (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES "Debug|RelWithDebInfo")
-
 # Explicitly set the `PlatformTarget` for C# projects, since AnyCPU can result in 
 # System.BadImageFormatException throws, when trying to load C++/CLI assemblies.
 IF(CMAKE_GENERATOR_PLATFORM STREQUAL "x64")
