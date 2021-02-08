@@ -53,6 +53,12 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES
     VS_GLOBAL_ROOTNAMESPACE ${PROJECT_NAME}
 )
 
+# Optional: enable native code debugging to allow stepping into unmanaged sources.
+# This is only required by the top level executable project.
+IF(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES "Debug|RelWithDebInfo")
+    SET_PROPERTY(TARGET ${PROJECT_NAME} PROPERTY VS_GLOBAL_EnableUnmanagedDebugging "true")
+ENDIF (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE MATCHES "Debug|RelWithDebInfo")
+
 # Setup installer.
 INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBRARY_DIR}
