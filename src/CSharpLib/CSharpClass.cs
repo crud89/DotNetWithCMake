@@ -8,5 +8,10 @@ namespace Example
         {
             return "I am a C# class!";
         }
+
+        public int AnswerEverything()
+        {
+            return 42;
+        }
     }
 }
