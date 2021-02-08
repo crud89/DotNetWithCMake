@@ -34,6 +34,7 @@ SET(CMAKE_INSTALL_INCLUDE_DIR "include/")
 SET(CMAKE_INSTALL_EXPORT_DIR "cmake/")
 
 # Include sub-projects.
+ADD_SUBDIRECTORY(src/UnmanagedLib)
 ADD_SUBDIRECTORY(src/CommonLib)
 ADD_SUBDIRECTORY(src/CppCliLib)
 ADD_SUBDIRECTORY(src/CSharpLib)
