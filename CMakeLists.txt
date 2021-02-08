@@ -27,6 +27,9 @@ ENDIF()
 # Set the C++ standard for all projects.
 SET(CMAKE_CXX_STANDARD 17)
 
+# Define runtime intermediate build directory, so that debugging the Visual Studio solution works as expected.
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/binaries/")
+
 # Set export directory for CMake config.
 SET(CMAKE_INSTALL_BINARY_DIR "bin/")
 SET(CMAKE_INSTALL_LIBRARY_DIR "bin/")
