@@ -23,10 +23,13 @@ namespace WpfApp
         {
             InitializeComponent();
 
-            IHello hello = new CSharpClass();
-            MessageBox.Show(hello.SayHello());
-            hello = new CppCliClass();
-            MessageBox.Show(hello.SayHello());
+            ShowMessage(new CSharpClass());
+            ShowMessage(new CppCliClass());
+        }
+
+        private void ShowMessage(IHello hello)
+        {
+            MessageBox.Show($"{hello.SayHello()}\r\nThe answer is: {hello.AnswerEverything()}!");
         }
     }
 }
