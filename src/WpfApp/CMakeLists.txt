@@ -61,7 +61,7 @@ INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
     INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDE_DIR}
 )
 
-INSTALL(FILES "app.config" DESTINATION ${CMAKE_INSTALL_BINARY_DIR} RENAME "${PROJECT_NAME}.config")
+INSTALL(FILES "app.config" DESTINATION ${CMAKE_INSTALL_BINARY_DIR} RENAME "${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX}.config")
 # Also covers targets with different OUTPUT_NAME properties. Not yet supported, but will be added in near future: https://gitlab.kitware.com/cmake/cmake/-/issues/19903
 #INSTALL(FILES "app.config" DESTINATION ${CMAKE_INSTALL_BINARY_DIR} RENAME "$<TARGET_FILE_NAME:${PROJECT_NAME}>.config")
 
