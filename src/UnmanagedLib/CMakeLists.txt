@@ -5,7 +5,9 @@ PROJECT(UnmanagedLib VERSION 1.0.0.0 LANGUAGES CXX)
 ADD_LIBRARY(${PROJECT_NAME} SHARED "include/UnmanagedClass.h" "src/UnmanagedClass.cpp")
 
 # Define public header.
-SET_TARGET_PROPERTIES(${PROJECT_NAME} PUBLIC_HEADER "include/UnmanagedClass.h")
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES 
+        PUBLIC_HEADER "include/UnmanagedClass.h"
+)
 
 # Setup target include directories.
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME}
