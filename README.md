@@ -4,6 +4,7 @@ This project contains a .NET dummy application that can be build with CMake. It 
 
 Note that .NET projects require Visual Studio to be build. CMake only manages and sets up the required build scripts for the your Visual Studio version.
 
+- [Quick-Start your Project](#quick-start-your-project)
 - [Project Structure](#project-structure)
 - [Building](#building)
     - [From Command Line](#from-command-line)
@@ -16,6 +17,16 @@ Note that .NET projects require Visual Studio to be build. CMake only manages an
 - [Debugging](#debugging)
     - [Mixed-Mode Debugging](#mixed-mode-debugging)
     - [Stepping into Unmanaged Code](#stepping-into-unmanaged-code)
+
+## Quick-Start your Project
+
+This repository is a [template repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-on-github/creating-a-repository-from-a-template), which means that you can quickly create your own repository from a copy of the latest version of this repository. Simply click the *Use this template* button on the top and start customizing the project. Common tasks you want to do include:
+
+- Renaming the projects in the *CMakeLists.txt* files.
+- Removing projects that you do not need.
+- Changing the license.
+- Updating the readme.
+- Enjoy! 🎉
 
 ## Project Structure
 
