@@ -5,7 +5,7 @@ PROJECT(WpfApp VERSION 1.0.0.0 LANGUAGES CSharp)
 INCLUDE(CSharpUtilities)
 
 # Create assembly info with current version.
-CONFIGURE_FILE("Properties/AssemblyInfo.cs.template" "Properties/AssemblyInfo.cs")
+CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/src/AssemblyInfo.cs.template" "${CMAKE_BINARY_DIR}/Config/${PROJECT_NAME}/AssemblyInfo.cs")
 
 # Add executable project.
 ADD_EXECUTABLE(${PROJECT_NAME}
@@ -15,8 +15,8 @@ ADD_EXECUTABLE(${PROJECT_NAME}
 	"App.xaml.cs"
 	"MainWindow.xaml"
 	"MainWindow.xaml.cs"
-
-    "Properties/AssemblyInfo.cs"
+    
+    "${CMAKE_BINARY_DIR}/Config/${PROJECT_NAME}/AssemblyInfo.cs"
 	"Properties/Resources.Designer.cs"
 	"Properties/Resources.resx"
 	"Properties/Settings.Designer.cs"
@@ -25,7 +25,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
 
 # Set designer and XAML properties.
 CSHARP_SET_DESIGNER_CS_PROPERTIES(
-    "Properties/AssemblyInfo.cs"
+    "${CMAKE_BINARY_DIR}/Config/${PROJECT_NAME}/AssemblyInfo.cs"
 	"Properties/Resources.Designer.cs"
     "Properties/Resources.resx"
 	"Properties/Settings.Designer.cs"

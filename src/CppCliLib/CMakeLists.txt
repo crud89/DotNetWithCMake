@@ -1,5 +1,8 @@
 PROJECT(CppCliLib VERSION 1.0.0.0 LANGUAGES CXX)
 
+# Create assembly info with current version.
+CONFIGURE_FILE("${CMAKE_SOURCE_DIR}/src/AssemblyInfo.cpp.template" "${CMAKE_BINARY_DIR}/Config/${PROJECT_NAME}/AssemblyInfo.cpp")
+
 # Collect header & source files.
 SET(CppCliLib_HEADERS
     "CppClass.h"
@@ -14,6 +17,7 @@ SOURCE_GROUP(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${CppCliLib_SOURCES} ${CppCl
 
 # Add shared library project.
 ADD_LIBRARY(${PROJECT_NAME} SHARED
+    "${CMAKE_BINARY_DIR}/Config/${PROJECT_NAME}/AssemblyInfo.cpp"
     ${CppCliLib_HEADERS}
     ${CppCliLib_SOURCES}
 )
