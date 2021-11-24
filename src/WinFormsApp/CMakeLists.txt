@@ -33,7 +33,7 @@ CSHARP_SET_WINDOWS_FORMS_PROPERTIES(
 
 # Define dependencies.
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-    PUBLIC CommonLib CppCliLib CSharpLib
+    PUBLIC CommonLib CppCliLib CSharpLib NuGetExample
 )
 
 # Set CLR assembly properties.

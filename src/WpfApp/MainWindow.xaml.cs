@@ -25,6 +25,8 @@ namespace WpfApp
 
             ShowMessage(new CSharpClass());
             ShowMessage(new CppCliClass());
+
+            Logger.Log("My work is done here.");
         }
 
         private void ShowMessage(IHello hello)

@@ -15,6 +15,8 @@ namespace WinFormsApp
 
             ShowMessage(new CSharpClass());
             ShowMessage(new CppCliClass());
+
+            Logger.Log("My work is done here.");
         }
 
         private static void ShowMessage(IHello hello)

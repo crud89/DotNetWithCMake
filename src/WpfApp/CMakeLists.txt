@@ -43,7 +43,7 @@ SET_PROPERTY(SOURCE App.xaml PROPERTY VS_XAML_TYPE "ApplicationDefinition")
 
 # Define dependencies.
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-    PUBLIC CommonLib CppCliLib CSharpLib
+    PUBLIC CommonLib CppCliLib CSharpLib NuGetExample
 )
 
 # Set CLR assembly properties.
