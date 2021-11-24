@@ -24,7 +24,8 @@ ADD_LIBRARY(${PROJECT_NAME} SHARED
 
 # Define dependencies.
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-    PUBLIC CommonLib UnmanagedLib
+    PUBLIC CommonLib 
+    PRIVATE UnmanagedLib
 )
 
 # Set target link options (allows to step into and set breakpoints for mixed-mode C++ assemblies).
