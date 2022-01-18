@@ -1,0 +1,40 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Visual Studio 16 2019",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/presets/",
+      "installDir": "${sourceDir}/install/presets/",
+      "cacheVariables": {
+        "CMAKE_VS_NUGET_PACKAGE_RESTORE": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "restore",
+      "configurePreset": "default",
+      "resolvePackageReferences": "only"
+    },
+    {
+      "name": "build",
+      "configurePreset": "default",
+      "resolvePackageReferences": "off"
+    },
+    {
+      "name": "restore-and-build",
+      "configurePreset": "default",
+      "resolvePackageReferences": "on"
+    }
+  ]
+}
