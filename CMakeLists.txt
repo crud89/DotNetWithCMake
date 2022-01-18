@@ -1,23 +1,21 @@
-# Lowest version with C# support is 3.8.
-# Lowest version that supports VS 2019 is 3.14.
-CMAKE_MINIMUM_REQUIRED(VERSION 3.14)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.23)
 PROJECT(Example LANGUAGES CSharp CXX)
 
 # Set global .NET Framework version.
 SET(CMAKE_DOTNET_TARGET_FRAMEWORK_VERSION "v4.7.2")
 
 # Set the C# language version for all projects.
-SET(CMAKE_CSharp_FLAGS "/langversion:6")
+SET(CMAKE_CSharp_FLAGS "/langversion:6 ${CMAKE_CSharp_FLAGS}")
 
 # Explicitly set the `PlatformTarget` for C# projects, since AnyCPU can result in 
 # System.BadImageFormatException throws, when trying to load C++/CLI assemblies.
 IF(CMAKE_GENERATOR_PLATFORM STREQUAL "x64")
-  SET(CMAKE_CSharp_FLAGS "/platform:x64")
+  SET(CMAKE_CSharp_FLAGS "/platform:x64 ${CMAKE_CSharp_FLAGS}")
 ELSEIF(CMAKE_GENERATOR_PLATFORM STREQUAL "Win32")
-    SET(CMAKE_CSharp_FLAGS "/platform:x86")
+  SET(CMAKE_CSharp_FLAGS "/platform:x86 ${CMAKE_CSharp_FLAGS}")
 ELSE()
   MESSAGE(WARNING "Generator platform is set to '${CMAKE_GENERATOR_PLATFORM}', which is not supported by managed projects. Defaulting to 'AnyCPU'...")
-  SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU")
+  SET(CMAKE_CSharp_FLAGS "/platform:AnyCPU ${CMAKE_CSharp_FLAGS}")
 ENDIF()
 
 # Set the C++ standard for all projects.
